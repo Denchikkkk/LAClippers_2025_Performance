@@ -1,1 +1,1 @@
-# LAClippers_2025_Performance
+# LAClippers 2025 Performance
