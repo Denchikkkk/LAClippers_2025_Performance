@@ -79,4 +79,6 @@ For future procedures we built new columns:
 - `OPT_TEAM_ABBREVIATION`: Abbreviation of the oponent team (e.g., `NYK`).
 - `HA`: Court advantage (`H` for home games, `A` for away games).
 
+<img src="img/GamesDFHead.jpeg">
+
 Then, using our GamesDF we extracted the plays for each game using the `GAME_ID`.
