@@ -22,7 +22,9 @@ In this repository we will analyze the performance of the <b>Los Angeles Clipper
 >
 > 6.  [Conclusions & Findings]
 >
-> 7.  [References & Ack]
+> 7.  [References & Ack](#7-references--acknowledgments)
+>
+> 8.  [Appendix](8-appendix)
 
 ## 1. Introduction
 
@@ -38,11 +40,11 @@ We will analyze the Clippers’ game data in an effort to understand and address
 
 ### 1.1 Overview of the project
 
-This project consisted in first, download the data
+This project analyzes the performance of the Los Angeles Clippers, focusing on key basketball metrics such as points scored, wins, etc. By leveraging basic game data, we explore scoring patterns, win probabilities, and trends in the team's performance over time. The project combines data extraction, transformation, and analysis to derive actionable insights, offering a clear view of the Clippers' gameplay dynamics and efficiency. Through this work, we aim to highlight how fundamental statistics can reveal meaningful trends in professional basketball.
 
-### 1.2 Project Goals
+### 1.2 Project Goal
 
-The goal that we set before starting the analysis, was to try to find any significal factors that could explain Clippers' victories and their defeats. Ideally it would be fun to find some insights Our data is limited, but data is magic.
+The goal of this project was to identify the key factors that led the Los Angeles Clippers to win games and to understand the patterns contributing to their losses.
 
 ## 2. Dataset
 
@@ -81,4 +83,51 @@ For future procedures we built new columns:
 
 <img src="img/GamesDFHead.jpeg">
 
-Then, using our GamesDF we extracted the plays for each game using the `GAME_ID`.
+Using the `GAME_ID` and the `nba_api`'s `playbyplay.PlayByPlay(game_id)` method, we extracted all plays for each game. This method returns a dataframe, from which we selected the following columns:
+
+- `GAME_ID`: Unique identifier for the game.
+- `EVENTMSGTYPE`: Integer indicating the type of play (e.g., defensive action, scoring event, substitution).
+- `PERIOD`: The quarter in which the play occurred.
+- `PCTIMESTRING`: Time remaining in the quarter.
+- `HOMEDESCRIPTION`: Description of the play from the perspective of the home team.
+- `NEUTRALDESCRIPTION`: Description of the play not specific to either team.
+- `VISITORDESCRIPTION`: Description of the play from the perspective of the visiting team.
+- `SCORE`: The score at the time of the play.
+- `SCOREMARGIN`: The point differential between the home and visiting teams.
+
+This is how the original playsDF looked:
+
+<img src="img/initialPlaysDF.jpg">
+
+To focus on plays impacting the score, we filtered the dataset to include only scoring events. Using `PCTIMESTRING` and `PERIOD`, we created a new column, `TIME_PLAYED`, which stores the cumulative game time for each play, where `00:00` marks the game’s start and `48:00` represents the end of regulation time. Additionally, we added a column named `LAC_PTS` to capture the Los Angeles Clippers' points for each play and narrowed the dataframe to include only their plays.
+
+At the end this is how our ClippersPlaysDF looked like:
+
+<img src="img/ClippersPlaysDF.jpg">
+
+All processes related to the extraction and transformation of the data used in this project are documented in the corresponding scripts and notebooks: [`data_loader.ipynb`](data_loader.ipynb).
+
+## 3. Methodology
+
+## 7. References & Acknowledgments
+
+### 7.1 References
+
+- **NBA API**: The primary source for play-by-play game data, accessed through the `nba_api` Python library. This project relied heavily on its comprehensive basketball statistics. [Documentation](https://github.com/swar/nba_api).
+
+- **Python Libraries**: Utilized `Pandas` for data manipulation, `NumPy` for numerical analysis and `Seaborn` for data visualization, enabling efficient processing of the Clippers' performance metrics.
+
+### 7.2 Acknowledgments
+
+- **NBA**: Gratitude to the NBA for being a pioneering data-driven organization in sports, providing rich and accessible basketball data that fuels projects like this one.
+
+- **ESPN**: A special thanks to ESPN for their insightful game analyses, which inspired us to analyze LA Clippers 2024-2025 season.
+
+## 8. Appendix
+
+**Figure 1: Example of ESPN-Style Game Analysis**
+
+<center>
+<img src="img/ESPN_DataAnalysis.jpg" width="65%">
+</center>
+*Description*: This sample visualization, inspired by ESPN’s basketball analytics, illustrates a breakdown of scoring trends and key plays in an NBA game. It highlights metrics like points scored and scoring margins, similar to those analyzed in our study of the Clippers’ wins and losses. This style motivated our approach to uncovering patterns in basic game data.
