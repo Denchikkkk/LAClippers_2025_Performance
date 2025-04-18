@@ -109,6 +109,28 @@ All processes related to the extraction and transformation of the data used in t
 
 ## 3. Methodology
 
+In this section, we’ll walk through the steps we took to analyze the performance of the Los Angeles Clippers throughout the season.
+
+We started by building our dataset using the NBA API. With Python as our tool of choice, we processed the raw data to shape it into a structure that suited our needs—this process is covered in detail in Section 2: Dataset.
+
+#### 3.1 PCT (winning percentage)
+
+Our first focus was to track the evolution of the team’s winning percentage (PCT) across all games played. Using the schedule data (dates and game outcomes), we calculated how the PCT shifted over time, reflecting the impact of each win or loss. This metric is key in the NBA, as it directly influences a team’s standing in the league rankings.
+
+The formula of the PCT is:
+
+$\text{PCT} = \frac{\text{Wins}}{\text{Wins} + \text{Losses}}$
+
+After visualizing this data, we uncovered distinct patterns—like the Clippers’ strong winning streaks, their challenging slumps, and whether they displayed consistent play or grappled with ups and downs across different moments of the season.
+
+#### 3.2 PTS (Wins vs Losses)
+
+Once we’d closely examined how the Clippers’ win percentage (PCT) evolved over time, we turned our attention to analyzing the points they scored, breaking it down between wins and losses.
+
+Using the play-by-play dataset from every game, we put together a visualization where the x-axis tracked the game’s timeline, and the y-axis showed the team’s points. This let us map out how the Clippers’ scoring unfolded across each quarter—and even into overtime when it happened. We colored the scoring trends green for wins and red for losses to make the outcomes pop visually.
+
+The goal here was to hunt for a “magic number”—a point threshold where, if the Clippers scored above it, their chances of winning shot up significantly.
+
 ## 7. References & Acknowledgments
 
 ### 7.1 References
